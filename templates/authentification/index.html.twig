@@ -1,0 +1,46 @@
+{% extends 'Authentification.html.twig' %}
+
+
+{% block body %}
+{#% if app.user %#}
+    {# do redirect('www.site.com') #}
+{% if not(app.user) %}
+
+      <div class="login-box">
+      <div class="login-logo">
+        <a href="#"><b>Gestion Inventaire</b></a>
+      </div><!-- /.login-logo -->
+      <div class="login-box-body">
+        <p class="login-box-msg">Connectez-vous</p>
+        {%if error %}
+            <div class="alert alert-danger">
+                {{ error.messageKey|trans(error.messageData, 'authentification') }}
+            </div>
+        {% endif %}
+        <form action="{{path('authentification')}}" method="post">
+          <div class="form-group has-feedback">
+            <label>Username</label>
+            <input type="text" class="form-control" name="_username" />
+          </div>
+          <div class="form-group has-feedback">
+            <label>Password</label>
+            <input type="password" class="form-control" name="_password"/>
+          </div>
+          
+        <input type="hidden" name="_target_path" value="{{ app.request.get('redirect_to') }}"/>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+            
+            <button type="submit" class="btn btn-primary btn-block">Connecter</button>
+            <br>
+            <a href="{{path('inscription')}}">Inscription</a>
+           
+        </form>
+
+     
+
+      </div><!-- /.login-box-body -->
+    </div><!-- /.login-box -->
+{% else%}
+  <h3><a href="{{path('principale')}}">Cliquer ici pour rediriger</a></h3>
+{% endif %}
+{% endblock %}

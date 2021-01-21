@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="box box-solid">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Gestion de l'emplacement des produits</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                    <div class="card">
+                                        <!-- <h5 class="card-header">Examples</h5> -->
+                    <div class="card-body">
+                    <div class="">
+                    <div class="container">
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            Ajouter nouveau emplacement
+                        </a>
+                    </div>                         
+                   
+                                                <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Ajouter nouveau emplacement</h5>
+                                            <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                                                 <span aria-hidden="true">&times;</span>
+                                            </a>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        {{form_start(EmplacementView)}}
+                                            <div class="col-lg-6">
+                                                {{form_row(EmplacementView.Emplacement)}}
+                                            </div>
+                                            <div class="col-lg-6">
+                                                {{form_row(EmplacementView.Note)}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <button type="submit" class="btn btn-block btn-info">Ajouter</button>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <button type="reset" class="btn btn-block btn-danger">Annuler</button>
+                                            </div>
+                                            {{form_end(EmplacementView)}}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="#" class="btn btn-warning" data-dismiss="modal">Réduire</a>
+                                                                <!-- <a href="#" class="btn btn-primary">Save changes</a> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="content">
+                    <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Emplacement</th>
+                        <th>Note</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for liste in ListeEmplacement %}
+                      <tr>
+                        <td>{{liste.Emplacement}}</td>
+                        <td>{{liste.Note}}</td>
+                        <td>
+                            <a href="{{path('supprimer_emplacement' , {'id' : liste.id} )}}" class="btn btn-danger" onClick="return confirm('Voulez vous vraiment supprimer ce code?')">Supprimer</a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th>Code complet</th>
+                        <th>Code</th>
+                        <th>Action</th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                  </div>
+
+
+
+
+                </div>
+    </div>
+{% endblock %}

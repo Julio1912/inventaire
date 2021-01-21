@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for Detail in Details %}
+     <div class="box box-solid content">
+        <div class="box-header with-border">
+            <h3 class="box-title">Detail Inventaire {{Detail.Designation}}</h3>
+        </div><!-- /.box-header -->
+        <div class="box-body">
+            <div class="row">
+                <div class="card">
+                    <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <dt>Code : </dt>
+                                    <dd>{{Detail.CodeComplet}}</dd>
+                                    <br>
+                                    <dt>Designation : </dt>
+                                    <dd>{{Detail.Designation}}</dd>
+                                    <br>
+                                    <dt>Date de reception : </dt>
+                                    <dd>{{Detail.DateReception | date('d-m-y')}}</dd>
+                                    <br>
+                                    <dt>Identification : </dt>
+                                    <dd>{{Detail.Identification}}</dd>
+                                    <br>
+
+                                </div>
+                                <div class="col-lg-6">
+                                    <dt>Emplacement : </dt>
+                                    <dd>{{Detail.Emplacement}}</dd>
+                                    <br>
+                                    <dt>Numéros de serie : </dt>
+                                    <dd>{{Detail.NumerosSerie}}</dd>
+                                    <br>
+                                    <dt>Date d'affectation : </dt>
+                                    <dd>{{Detail.DateAffectation | date('d-m-y')}}</dd>
+                                    <br>
+                                </div>
+                            </div>
+
+
+                    </div>
+
+                    <div class="box-footer">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <a href="{{path('modifier_inventaire' , {'id' : Detail.id})}}" class="btn btn-success btn-block"><span class="glyphicon glyphicon-edit"> Modifier Information</span></a>
+                            </div>
+                            <div class="col-lg-6">
+                                <a href="{{path('supprimer_inventaire' , {'id' : Detail.id} )}}" class="btn btn-danger btn-block" onClick="return confirm('Voulez vous vraimment supprimer cette information')"><span class="glyphicon glyphicon-trash">Supprimer Information</span></a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+    </div>
+
+    {% endfor %}
+
+
+{% endblock %}

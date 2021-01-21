@@ -1,0 +1,40 @@
+{% extends 'Authentification.html.twig' %}
+
+{% block body %}
+
+    <div class="register-box">
+      <div class="register-logo">
+        <a href="#"><b>Gestion Inventaire</b></a>
+      </div>
+
+      <div class="register-box-body">
+        <p class="login-box-msg">Enregistrer nouveau membre</p>
+        {{form_start(InscriptionView)}}
+          <div class="form-group has-feedback">
+            {{form_row(InscriptionView.Name)}}
+          </div>
+          <div class="form-group has-feedback">
+           {{form_row(InscriptionView.Username)}}
+          </div>
+          <div class="form-group has-feedback">
+            {{form_row(InscriptionView.Password)}}
+          </div>
+          <div class="form-group has-feedback">
+            {{form_row(InscriptionView.confirm_password)}}
+          </div>
+          <div class="row">
+            <div class="col-lg-4">
+                Déjà membre <a href="{{path('authentification')}}" class="text-center">Connecter içi</a>
+            </div>
+            <div class="col-lg-8">
+                <button type="submit" class="btn btn-primary btn-block btn-flat">Enregistrer</button>
+            </div>
+          </div>
+             
+            
+       {{form_end(InscriptionView)}}
+      
+      </div><!-- /.form-box -->
+    </div><!-- /.register-box -->
+
+{% endblock %}

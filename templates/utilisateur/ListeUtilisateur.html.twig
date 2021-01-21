@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UtilisateurController!{% endblock %}
+
+{% block body %}
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">Gestion des utilisateurs</h3>
+    </div><!-- /.box-header -->
+    <div class="box-body">
+        <div class="row">
+            <div class="card">
+                <!-- <h5 class="card-header">Examples</h5> -->
+                <div class="card-body">
+                    <div class="content">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Nom d'utilisateur (Username)</th>
+                                    <th>Role</th>
+                                    {% if is_granted('ROLE_SUPER_ADMIN') %}<th>Action</th>{% endif %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for liste in ListeUtilisateur %}
+                                {% if liste.Username != app.user.username %}
+                                <tr>
+                                    <td>{{liste.Name}}</td>
+                                    <td>{{liste.Username}}</td>
+                                    {% for role in liste.Roles %}
+                                    <td>{{role}}</td>
+                                    {% endfor %}
+                                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                                    <td>
+                                        <a href="{{path('modifier_utilisateur' , {'id' : liste.id} )}}" class="btn btn-success">Modifier</a>
+                                        <a href="{{path('supprimer_utilisateur' , {'id' : liste.id} )}}" class="btn btn-danger" onClick="return confirm('Voulez vous vraiment supprimer ce code?')">Supprimer</a>
+                                    </td>
+                                    {% endif %}
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Nom d'utilisateur (Username)</th>
+                                    <th>Role</th>
+                                    {% if is_granted('ROLE_SUPER_ADMIN') %}<th>Action</th>{% endif %}
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
